@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: corp-portal-config
+  profiles:
+    active:
+      - native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+        bootstrap: true
+
+server:
+  port: 8071
