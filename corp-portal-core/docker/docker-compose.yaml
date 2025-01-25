@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: corp_portal_postgres
+    image: postgres:12.3
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=corp-portal-core
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./initSchema.sql:/docker-entrypoint-initdb.d/initSchema.sql
