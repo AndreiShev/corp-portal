@@ -2,25 +2,35 @@ spring:
   application:
     name: corp-portal-config
   profiles:
-    active:
-      - vault
+    active: native
+
   cloud:
     config:
       server:
-        vault:
-          kv-version: 2
-          default-key: dev # secret
-          backend: corp-portal-core # name secret engine
-    vault:
-      host: localhost
-      port: 8200
-      scheme: http
-      uri: http://localhost:8200
-      connection-timeout: 5000
-      read-timeout: 15000
-      authentication: none
-  config:
-    import: vault://
+        native:
+          search-locations: classpath:/config
+
+
+#  profiles:
+#    active:
+#      - vault
+#  cloud:
+#    config:
+#      server:
+#        vault:
+#          kv-version: 2
+#          default-key: dev # secret
+#          backend: corp-portal-core # name secret engine
+#    vault:
+#      host: localhost
+#      port: 8200
+#      scheme: http
+#      uri: http://localhost:8200
+#      connection-timeout: 5000
+#      read-timeout: 15000
+#      authentication: none
+#  config:
+#    import: vault://
 
 server:
   port: 8071
