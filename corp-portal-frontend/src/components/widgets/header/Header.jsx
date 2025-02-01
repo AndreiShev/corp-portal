@@ -1,4 +1,5 @@
 import './header.css'
+import MainMenu from "../mainMenu/MainMenu";
 
 function Header () {
     return (
@@ -6,7 +7,7 @@ function Header () {
             <div className="container">
                 <div className="header__row">
                     <div className="header__logo">LOGO</div>
-                    <div className="header__nav">NAV</div>
+                    <MainMenu />
                 </div>
 
             </div>

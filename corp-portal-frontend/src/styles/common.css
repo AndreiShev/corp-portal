@@ -4,3 +4,7 @@
     padding: 0 30px;
     background: #0a53be;
 }
+
+li {
+    list-style-type: none; /* Убираем маркеры */
+}

@@ -1,5 +1,5 @@
 import './styles/common.css'
-import Root from './routes/Root';
+import Root from './components/pages/Root/Root';
 import ErrorPage from './error-page';
 import Contact from './routes/Contact';
 
@@ -8,6 +8,7 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
+import Company from "./components/pages/Company/Company";
 
 
 const router = createBrowserRouter([
@@ -17,8 +18,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
-        path: "contacts/:contactId",
-        element: <Contact />,
+        path: "company",
+        element: <Company />
     },
 ]);
 
