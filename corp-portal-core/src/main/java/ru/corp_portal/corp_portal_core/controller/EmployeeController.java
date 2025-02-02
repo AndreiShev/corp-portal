@@ -3,7 +3,7 @@ package ru.corp_portal.corp_portal_core.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.corp_portal.corp_portal_core.dto.EmployeeInsert;
+import ru.corp_portal.corp_portal_core.dto.insert.EmployeeInsert;
 import ru.corp_portal.corp_portal_core.dto.Response.EmployeeResponse;
 import ru.corp_portal.corp_portal_core.entities.Employee;
 import ru.corp_portal.corp_portal_core.mapper.EmployeeMapper;
@@ -30,7 +30,7 @@ public class EmployeeController {
     public ResponseEntity<EmployeeResponse> addEmployee(@RequestBody EmployeeInsert insert) {
         return ResponseEntity.ok().body(employeeMapper
                 .getResponseFromEmployee(employeeService
-                        .saveEmployee(employeeMapper.insertToEmployee(insert))));
+                        .save(employeeMapper.insertToEmployee(insert))));
     }
 
 

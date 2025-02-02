@@ -2,7 +2,7 @@ package ru.corp_portal.corp_portal_core.mapper;
 
 
 import org.springframework.stereotype.Component;
-import ru.corp_portal.corp_portal_core.dto.EmployeeInsert;
+import ru.corp_portal.corp_portal_core.dto.insert.EmployeeInsert;
 import ru.corp_portal.corp_portal_core.dto.Response.EmployeeResponse;
 import ru.corp_portal.corp_portal_core.entities.Employee;
 

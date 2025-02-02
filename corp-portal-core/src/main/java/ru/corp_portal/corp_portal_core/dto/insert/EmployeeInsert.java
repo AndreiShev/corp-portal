@@ -1,4 +1,4 @@
-package ru.corp_portal.corp_portal_core.dto;
+package ru.corp_portal.corp_portal_core.dto.insert;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

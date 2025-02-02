@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: corp-portal-core
+  liquibase:
+    enabled: false
+  #  cloud:
+  #    config:
+  #      uri: http://localhost:8071
+
+  jpa:
+    database: postgresql
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/corp-portal-core
+    username: postgres
+    password: postgres
+    hikari:
+      schema: core_schema
+      connection-init-sql: CREATE schema if not exists core_schema
+      connection-timeout: 10000
+
+#eureka:
+#  instance:
+#    preferIpAddress: true
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8070/eureka/
