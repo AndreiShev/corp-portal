@@ -1,6 +1,8 @@
 package ru.corp_portal.corp_portal_core.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.corp_portal.corp_portal_core.dto.Response.DepartmentResponse;
@@ -30,6 +32,13 @@ public class DepartmentController {
     public ResponseEntity<DepartmentResponse> getById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok().body(
                 departmentMapper.departmentToResponse(departmentService.getDepartment(id))
+        );
+    }
+
+    @GetMapping("/tree/{id}")
+    public ResponseEntity<JSONArray> getTree(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok().body(
+                departmentService.getThreeDepartments(id)
         );
     }
 

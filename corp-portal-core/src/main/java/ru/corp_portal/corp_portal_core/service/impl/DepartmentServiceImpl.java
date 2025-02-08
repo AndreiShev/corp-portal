@@ -2,13 +2,16 @@ package ru.corp_portal.corp_portal_core.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 import ru.corp_portal.corp_portal_core.entities.Department;
 import ru.corp_portal.corp_portal_core.exceptions.EntityNotFoundException;
 import ru.corp_portal.corp_portal_core.repository.DepartmentRepository;
 import ru.corp_portal.corp_portal_core.service.DepartmentService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,14 +31,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.findAll();
     }
 
-    public void getThreeDepartments() {
-        /**
-         * Получить древовидную структуру подразделения
-         * все родительские подразделения имеют null в качестве родителя
-         * 1. выбрать все родительские подразделения
-         * 2. по кажому родительскому подразделению выписать всех детей
-         * 3. к каждому ребенку применить пункт 2, пока не закончатся дети
-         */
+    @Override
+    public JSONArray getThreeDepartments(Integer parent_id) {
+        Object obj = null;
+        try {
+            obj = new JSONParser().parse(departmentRepository.findCarsAfterYear(parent_id));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        return (JSONArray) obj;
     }
 
     @Override
