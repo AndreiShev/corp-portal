@@ -28,6 +28,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.findAll();
     }
 
+    public void getThreeDepartments() {
+        /**
+         * Получить древовидную структуру подразделения
+         * все родительские подразделения имеют null в качестве родителя
+         * 1. выбрать все родительские подразделения
+         * 2. по кажому родительскому подразделению выписать всех детей
+         * 3. к каждому ребенку применить пункт 2, пока не закончатся дети
+         */
+    }
+
     @Override
     @Transactional
     public Department save(Department department) {
@@ -46,8 +56,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department update(Integer id, Department department) {
         Department existDepartment = getDepartment(id);
 
-//        Придумать логику замены родителя подразделения
-//        existDepartment.setParent(department.getParent());
+        if (department.getParent() != null && !department.getParent().equals(existDepartment.getParent())) {
+            existDepartment.getParent().getChildren().remove(department);
+            departmentRepository.save(existDepartment.getParent());
+            department.getParent().getChildren().add(existDepartment);
+            departmentRepository.save(department.getParent());
+            existDepartment.setParent(department.getParent());
+        }
+
         existDepartment.setName(department.getName());
         existDepartment.setDescription(department.getDescription());
         existDepartment.setParentSystemID(department.getParentSystemID());

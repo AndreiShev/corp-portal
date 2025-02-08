@@ -1,3 +1,15 @@
 databaseChangeLog: #параметр в котором находятся миграции
   - include:
-      file: db/changelog/changeset/create-employee-table.sql
+      file: db/changelog/changeset/001-create-company-table.sql
+  - include:
+      file: db/changelog/changeset/002-create-department-table.sql
+  - include:
+      file: db/changelog/changeset/003-create-employee-table.sql
+#  - include:
+#      file: db/changelog/changeset/004-add-foreign-keys-to-department.sql
+#  - include:
+#      file: db/changelog/changeset/005-add-foreign-keys-to-employee.sql
+  - include:
+      file: db/changelog/changeset/006-create-department-functions.sql
+
+

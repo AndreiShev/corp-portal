@@ -5,7 +5,8 @@ spring:
   application:
     name: corp-portal-core
   liquibase:
-    enabled: false
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yml
   #  cloud:
   #    config:
   #      uri: http://localhost:8071
@@ -14,7 +15,7 @@ spring:
     database: postgresql
     open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/corp-portal-core
@@ -24,7 +25,9 @@ spring:
       schema: core_schema
       connection-init-sql: CREATE schema if not exists core_schema
       connection-timeout: 10000
-
+logging:
+  level:
+    sql: debug
 #eureka:
 #  instance:
 #    preferIpAddress: true

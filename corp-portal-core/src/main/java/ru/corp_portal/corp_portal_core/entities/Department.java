@@ -32,14 +32,14 @@ public class Department {
     private Integer parentSystemID;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "company_id", foreignKey=@ForeignKey(name="foreign_key_department_company"))
     private Company company;
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Employee> employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
+    @JoinColumn(name = "parent_id", foreignKey=@ForeignKey(name="foreign_key_department_department_id"))
     private Department parent;
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
