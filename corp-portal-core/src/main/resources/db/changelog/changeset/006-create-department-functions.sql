@@ -11,7 +11,7 @@ as
 $$
 select jsonb_agg(sub)
 from (
-         select d.id, d.name, f_item_tree(d.id)
+         select d.id, d.name, f_item_tree(d.id) as children
          from core_schema.department d
          where d.parent_id = item_id
      ) as sub

@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.admin_body {
+    background-color: #21222D;
+    border-radius: 24px;
+    height: 100vh;
+    padding: 15px;
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+
+}
+
+.admin_body_container {
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.left_sidebar {
+    background-color: #171821;
+    width: 200px;
+    padding: 20px;
+    margin: 0 2px 0 0;
+    border-radius: 15px;
+    overflow: hidden;
+    border-collapse: separate;
+}
+
+.admin_main {
+    background-color: #171821;
+    border-radius: 15px;
+    height: 100vh;
+    width: 100%;
+    padding: 20px;
+}
+
+.sidebar_body {
+    min-width: 116px;
+}
+
+.sidebar_item {
+    min-width: 116px;
+    min-height: 20px;
+    border-radius: 6px;
+    text-align: start;
+    margin: 0 0 10px 0;
+    padding: 0 0 0 25px;
+}
+
+.sidebar_item:hover {
+    background-color: #A9DFD8;
+}
+
+.active {
+    background-color: #A9DFD8;
+}
+
+.link {
+    line-height: 30px;
+    text-decoration: none;
+    color: #87888C;
+}
+
+.active .link {
+    color: #171821;
+}
+
+.sidebar_item:hover .link {
+    color: #171821;
+}
+
+.dividing_line {
+    width: 2px;
+    height: 100vh;
+    background-color: #2C2D33;
+}
