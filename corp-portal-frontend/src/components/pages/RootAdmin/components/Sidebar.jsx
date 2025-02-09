@@ -5,9 +5,7 @@ const Sidebar = () => {
     const [activeMenuItem, setActiveMenuItem] = useState(null);
 
     const handleClick = (menuItem) => {
-        if (activeMenuItem === menuItem) {
-            setActiveMenuItem(null); // Закрываем активное подменю
-        } else {
+        if (activeMenuItem !== menuItem) {
             setActiveMenuItem(menuItem); // Открываем новое подменю
         }
     };

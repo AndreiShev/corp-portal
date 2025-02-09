@@ -2,7 +2,7 @@
 
 function UserGroups() {
     return (
-        <div>
+        <div className="container">
             UserGroups
         </div>
     );
