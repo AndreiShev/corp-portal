@@ -2,7 +2,6 @@
 
 .admin_body {
     background-color: #21222D;
-    border-radius: 24px;
     height: 100vh;
     padding: 15px;
     font-family: "Inter", serif;
@@ -19,7 +18,7 @@
 
 .left_sidebar {
     background-color: #171821;
-    width: 200px;
+    width: 300px;
     padding: 20px;
     margin: 0 2px 0 0;
     border-radius: 15px;
@@ -35,7 +34,7 @@
     padding: 20px;
 }
 
-.sidebar_body {
+.sidebar_menu {
     min-width: 116px;
 }
 
@@ -46,14 +45,7 @@
     text-align: start;
     margin: 0 0 10px 0;
     padding: 0 0 0 25px;
-}
-
-.sidebar_item:hover {
-    background-color: #A9DFD8;
-}
-
-.active {
-    background-color: #A9DFD8;
+    color: #87888C;
 }
 
 .link {
@@ -63,15 +55,22 @@
 }
 
 .active .link {
-    color: #171821;
+    color: #A9DFD8;
 }
 
-.sidebar_item:hover .link {
-    color: #171821;
+.link:hover  {
+    background-color: #87888C;
+    color: #A9DFD8;
 }
 
-.dividing_line {
-    width: 2px;
-    height: 100vh;
-    background-color: #2C2D33;
+.sidebar_body_sub {
+    display: none;
+}
+
+.active .sidebar_body_sub {
+    display: block;
+}
+
+.submenu {
+    margin: 0 0 0 15px;
 }
