@@ -1,0 +1,14 @@
+.table-settings {
+    display: none;
+    border: 1px coral solid;
+    background-color: #20c997;
+    margin: 0 0 20px 0;
+}
+
+.table-settings.active {
+    display: block;
+}
+
+.table-settings .item {
+    margin: 0 20px 0 0;
+}

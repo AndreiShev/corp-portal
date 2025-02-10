@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import './EmployeeTable.css'
 
 const initialColumns = [
     { label: 'ID', value: 'id' },
@@ -55,8 +56,49 @@ export default function EmployeeTable() {
         setColumns(items);
     };
 
+    const activeTableCol = (event, label, value) => {
+        if (event.target.checked) {
+            handleAddColumn({label: label, value: value});
+        } else {
+            handleRemoveColumn(value);
+        }
+    };
+
+    const toggleSettings = (event) => {
+        let settingsElem = document.getElementById("table-settings");
+        if (!settingsElem.classList.contains("active")) {
+            settingsElem.classList.add("active");
+        } else {
+            settingsElem.classList.remove("active");
+        }
+    };
+
     return (
         <div>
+            <button className="table-settings-button" onClick={(event) => toggleSettings(event)}>Настройки</button>
+            <div className="table-settings" id="table-settings">
+                <label className="item">
+                    ID: <input onClick={(event) => activeTableCol(event, 'ID', 'id')} type="checkbox" name="id" defaultChecked={false}/>
+                </label>
+                <label className="item">
+                    Имя: <input onClick={(event) => activeTableCol(event, 'First Name', 'first_name')} type="checkbox" name="first_name" defaultChecked={false}/>
+                </label>
+                <label className="item">
+                    Фамилия: <input onClick={(event) => activeTableCol(event, 'Last Name', 'last_name')} type="checkbox" name="last_name" defaultChecked={false}/>
+                </label>
+                <label className="item">
+                    Отчество: <input onClick={(event) => activeTableCol(event, 'Second Name', 'second_name')} type="checkbox" name="second_name" defaultChecked={false}/>
+                </label>
+                <label className="item">
+                    Email: <input onClick={(event) => activeTableCol(event, 'Email', 'email')} type="checkbox" name="email" defaultChecked={false}/>
+                </label>
+                <label className="item">
+                    Подразделение: <input onClick={(event) => activeTableCol(event, 'Department', 'department')} type="checkbox" name="department" defaultChecked={false}/>
+                </label>
+                <label className="item">
+                    Компания: <input onClick={(event) => activeTableCol(event, 'Company', 'company')} type="checkbox" name="company" defaultChecked={false}/>
+                </label>
+            </div>
             <style>{`
                 .draggable-th {
                     cursor: grab;
@@ -104,25 +146,6 @@ export default function EmployeeTable() {
             </DragDropContext>
 
             {/* Кнопки для управления столбцами. Вынести в отдельное меню. Сделать toggle вместо click */}
-            <div style={{ marginTop: 20 }}>
-                <button onClick={() => handleAddColumn({ label: 'ID', value: 'id' })}>Добавить ID</button>
-                <button onClick={() => handleAddColumn({ label: 'First Name', value: 'first_name' })}>Добавить First Name</button>
-                <button onClick={() => handleAddColumn({ label: 'Last Name', value: 'last_name' })}>Добавить Last Name</button>
-                <button onClick={() => handleAddColumn({ label: 'Second Name', value: 'second_name' })}>Добавить Second Name</button>
-                <button onClick={() => handleAddColumn({ label: 'Email', value: 'email' })}>Добавить Email</button>
-                <button onClick={() => handleAddColumn({ label: 'Department', value: 'department' })}>Добавить Department</button>
-                <button onClick={() => handleAddColumn({ label: 'Company', value: 'company' })}>Добавить Company</button>
-
-                <br />
-
-                <button onClick={() => handleRemoveColumn('id')}>Удалить ID</button>
-                <button onClick={() => handleRemoveColumn('first_name')}>Удалить First Name</button>
-                <button onClick={() => handleRemoveColumn('last_name')}>Удалить Last Name</button>
-                <button onClick={() => handleRemoveColumn('second_name')}>Удалить Second Name</button>
-                <button onClick={() => handleRemoveColumn('email')}>Удалить Email</button>
-                <button onClick={() => handleRemoveColumn('department')}>Удалить Department</button>
-                <button onClick={() => handleRemoveColumn('company')}>Удалить Company</button>
-            </div>
         </div>
     );
 }
