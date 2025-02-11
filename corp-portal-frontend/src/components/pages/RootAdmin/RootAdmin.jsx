@@ -7,9 +7,7 @@ function RootAdmin() {
     return (
         <div className="admin_body">
             <div className="admin_body_container">
-                <aside className="left_sidebar">
-                    <Sidebar />
-                </aside>
+                <Sidebar />
                 <main className="admin_main" id="detail">
                     <Outlet />
                 </main>
