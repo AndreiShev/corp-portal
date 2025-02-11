@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import Employees from "./components/pages/Employees/Employees";
 import UserGroups from "./components/pages/UserGroups/UserGroups";
+import RootEmployee from "./components/pages/RootEmployee/RootEmployee";
 
 
 
@@ -22,41 +23,49 @@ const router = createBrowserRouter([
         path: "/",
         element: <Root />,
         errorElement: <ErrorPage />,
-    },
-    {
-        path: "company",
-        element: <Company />
-    },
-    {
-        path: "admin",
-        element: <RootAdmin />,
         children: [
             {
-                path: "content",
-                element: <Content />
-            },
-            {
-                path: "dashboard",
-                element: <Dashboard />
-            },
-            {
-                path: "services",
-                element: <Services />
-            },
-            {
-                path: "settings",
-                element: <Settings />
-            },
-            {
-                path: "employees",
-                element: <Employees />
-            },
-            {
-                path: "user-groups",
-                element: <UserGroups />
+                path: "admin",
+                element: <RootAdmin />,
+                children: [
+                    {
+                        path: "content",
+                        element: <Content />
+                    },
+                    {
+                        path: "dashboard",
+                        element: <Dashboard />
+                    },
+                    {
+                        path: "services",
+                        element: <Services />
+                    },
+                    {
+                        path: "settings",
+                        element: <Settings />
+                    },
+                    {
+                        path: "employees",
+                        element: <Employees />
+                    },
+                    {
+                        path: "user-groups",
+                        element: <UserGroups />
+                    }
+                ]
+            }, {
+                path: "/",
+                element: <RootEmployee />,
+                children: [
+                    {
+                        path: "company",
+                        element: <Company />
+                    }
+                ]
             }
         ]
-    }
+    },
+
 ]);
 
 

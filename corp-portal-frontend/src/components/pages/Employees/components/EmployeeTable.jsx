@@ -75,28 +75,31 @@ export default function EmployeeTable() {
 
     return (
         <div>
-            <button className="table-settings-button" onClick={(event) => toggleSettings(event)}>Настройки</button>
+            <div className="table-management-menu">
+
+                <button className="table-settings-button" onClick={(event) => toggleSettings(event)}>Настройки</button>
+            </div>
             <div className="table-settings" id="table-settings">
                 <label className="item">
-                    ID: <input onClick={(event) => activeTableCol(event, 'ID', 'id')} type="checkbox" name="id" defaultChecked={false}/>
+                    ID: <input onClick={(event) => activeTableCol(event, 'ID', 'id')} type="checkbox" name="id" defaultChecked={true}/>
                 </label>
                 <label className="item">
-                    Имя: <input onClick={(event) => activeTableCol(event, 'First Name', 'first_name')} type="checkbox" name="first_name" defaultChecked={false}/>
+                    Имя: <input onClick={(event) => activeTableCol(event, 'First Name', 'first_name')} type="checkbox" name="first_name" defaultChecked={true}/>
                 </label>
                 <label className="item">
-                    Фамилия: <input onClick={(event) => activeTableCol(event, 'Last Name', 'last_name')} type="checkbox" name="last_name" defaultChecked={false}/>
+                    Фамилия: <input onClick={(event) => activeTableCol(event, 'Last Name', 'last_name')} type="checkbox" name="last_name" defaultChecked={true}/>
                 </label>
                 <label className="item">
-                    Отчество: <input onClick={(event) => activeTableCol(event, 'Second Name', 'second_name')} type="checkbox" name="second_name" defaultChecked={false}/>
+                    Отчество: <input onClick={(event) => activeTableCol(event, 'Second Name', 'second_name')} type="checkbox" name="second_name" defaultChecked={true}/>
                 </label>
                 <label className="item">
-                    Email: <input onClick={(event) => activeTableCol(event, 'Email', 'email')} type="checkbox" name="email" defaultChecked={false}/>
+                    Email: <input onClick={(event) => activeTableCol(event, 'Email', 'email')} type="checkbox" name="email" defaultChecked={true}/>
                 </label>
                 <label className="item">
-                    Подразделение: <input onClick={(event) => activeTableCol(event, 'Department', 'department')} type="checkbox" name="department" defaultChecked={false}/>
+                    Подразделение: <input onClick={(event) => activeTableCol(event, 'Department', 'department')} type="checkbox" name="department" defaultChecked={true}/>
                 </label>
                 <label className="item">
-                    Компания: <input onClick={(event) => activeTableCol(event, 'Company', 'company')} type="checkbox" name="company" defaultChecked={false}/>
+                    Компания: <input onClick={(event) => activeTableCol(event, 'Company', 'company')} type="checkbox" name="company" defaultChecked={true}/>
                 </label>
             </div>
             <style>{`
