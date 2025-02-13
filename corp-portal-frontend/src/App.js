@@ -15,6 +15,10 @@ import {
 import Employees from "./components/pages/Employees/Employees";
 import UserGroups from "./components/pages/UserGroups/UserGroups";
 import RootEmployee from "./components/pages/RootEmployee/RootEmployee";
+import MainPage from "./components/pages/Main/MainPage";
+import Staff from "./components/pages/Staff/Staff";
+import Documents from "./components/pages/Documents/Documents";
+import EmployeeServices from "./components/pages/EmployeeServices/EmployeeServices";
 
 
 
@@ -58,8 +62,24 @@ const router = createBrowserRouter([
                 element: <RootEmployee />,
                 children: [
                     {
+                        path: '/',
+                        element: <MainPage />
+                    },
+                    {
                         path: "company",
                         element: <Company />
+                    },
+                    {
+                        path: "staff",
+                        element: <Staff />
+                    },
+                    {
+                        path: "documents",
+                        element: <Documents />
+                    },
+                    {
+                        path: "services",
+                        element: <EmployeeServices />
                     }
                 ]
             }

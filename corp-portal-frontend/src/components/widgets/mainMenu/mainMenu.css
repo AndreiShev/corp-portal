@@ -1,4 +1,23 @@
+.main-menu {
+    background-color: #0a53be;
+}
+
+.nav {
+
+}
+
+
 .nav-item {
-    margin: 0 20px;
     float: left;
+    padding: 15px;
+    border-left: 1px black solid;
+    color: #ffffff;
+}
+
+.nav-item:last-of-type {
+    border-right: 1px black solid;
+}
+
+.nav-item:hover {
+    background-color: #89aeff;
 }

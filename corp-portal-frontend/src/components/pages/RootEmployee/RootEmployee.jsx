@@ -6,7 +6,7 @@ import {Outlet} from "react-router-dom";
 export default function RootEmployee() {
 
     return (
-        <div>
+        <div className="main-container">
         <Header />
         <Outlet />
         <Footer />
