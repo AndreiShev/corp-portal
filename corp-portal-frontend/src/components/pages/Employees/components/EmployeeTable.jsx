@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import './EmployeeTable.css'
+import {Link} from "react-router-dom";
 
 const initialColumns = [
     { label: 'ID', value: 'id' },
@@ -16,7 +17,7 @@ function fetchData() {
     // метод для Rest запроса к сервису core
     return new Promise((resolve) => {
         setTimeout(() => resolve([
-            { id: 1, first_name: 'John', last_name: 'Doe', second_name: '', email: 'john.doe@example.com', department: 'IT', company: 'Acme Corp.' },
+            { id: '08b78ec1-d42e-458e-ab79-72af21341610', first_name: 'John', last_name: 'Doe', second_name: '', email: 'john.doe@example.com', department: 'IT', company: 'Acme Corp.' },
             { id: 2, first_name: 'Jane', last_name: 'Smith', second_name: '', email: 'jane.smith@example.com', department: 'HR', company: 'Acme Corp.' },
             { id: 3, first_name: 'Peter', last_name: 'Parker', second_name: '', email: 'peter.parker@example.com', department: 'Marketing', company: 'Acme Corp.' }
         ]), 1000);
@@ -138,7 +139,14 @@ export default function EmployeeTable() {
                             {data.map(row => (
                                 <tr key={row.id}>
                                     {columns.map(({value}) => (
-                                        <td id="id" key={`${row.id}-${value}`}>{row[value] || '-'}</td>
+                                        <td id="id" key={`${row.id}-${value}`}>
+                                            {value === 'id' ? (
+                                                <Link to={`/admin/employees/${row[value]}`}>{row[value]}</Link>  // Оборачиваем значение в ссылку
+                                                // <Link to={`/test`}>{row[value]}</Link>  // Оборачиваем значение в ссылку
+                                            ) : (
+                                                row[value] || '-'  // Если не id, просто выводим значение
+                                            )}
+                                        </td>
                                     ))}
                                 </tr>
                             ))}

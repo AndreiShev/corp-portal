@@ -19,6 +19,7 @@ import MainPage from "./components/pages/Main/MainPage";
 import Staff from "./components/pages/Staff/Staff";
 import Documents from "./components/pages/Documents/Documents";
 import EmployeeServices from "./components/pages/EmployeeServices/EmployeeServices";
+import UserAdmin from "./components/pages/UserAdmin/UserAdmin";
 
 
 
@@ -50,12 +51,16 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "employees",
-                        element: <Employees />
+                        element: <Employees />,
                     },
                     {
                         path: "user-groups",
                         element: <UserGroups />
-                    }
+                    },
+                    {
+                        path: "employees/:userId",
+                        element: <UserAdmin />
+                    },
                 ]
             }, {
                 path: "/",
