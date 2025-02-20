@@ -19,7 +19,7 @@ import MainPage from "./components/pages/Main/MainPage";
 import Staff from "./components/pages/Staff/Staff";
 import Documents from "./components/pages/Documents/Documents";
 import EmployeeServices from "./components/pages/EmployeeServices/EmployeeServices";
-import UserAdmin from "./components/pages/UserAdmin/UserAdmin";
+import UserAdmin from "./components/pages/Employees/components/UserAdmin/UserAdmin";
 
 
 

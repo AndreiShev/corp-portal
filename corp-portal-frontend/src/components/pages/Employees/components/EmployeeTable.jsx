@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import './EmployeeTable.css'
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const initialColumns = [
     { label: 'ID', value: 'id' },
-    { label: 'First Name', value: 'first_name' },
-    { label: 'Last Name', value: 'last_name' },
-    { label: 'Second Name', value: 'second_name' },
+    { label: 'First Name', value: 'firstName' },
+    { label: 'Last Name', value: 'lastName' },
+    { label: 'Second Name', value: 'secondName' },
     { label: 'Email', value: 'email' },
     { label: 'Department', value: 'department' },
     { label: 'Company', value: 'company' }
@@ -16,11 +17,7 @@ const initialColumns = [
 function fetchData() {
     // метод для Rest запроса к сервису core
     return new Promise((resolve) => {
-        setTimeout(() => resolve([
-            { id: '08b78ec1-d42e-458e-ab79-72af21341610', first_name: 'John', last_name: 'Doe', second_name: '', email: 'john.doe@example.com', department: 'IT', company: 'Acme Corp.' },
-            { id: 2, first_name: 'Jane', last_name: 'Smith', second_name: '', email: 'jane.smith@example.com', department: 'HR', company: 'Acme Corp.' },
-            { id: 3, first_name: 'Peter', last_name: 'Parker', second_name: '', email: 'peter.parker@example.com', department: 'Marketing', company: 'Acme Corp.' }
-        ]), 1000);
+        resolve(axios.get(`http://localhost:8080/api/v1/employee`));
     });
 }
 
@@ -31,7 +28,7 @@ export default function EmployeeTable() {
     useEffect(() => {
         async function loadData() {
             const response = await fetchData();
-            setData(response);
+            setData(response.data.employeeResponses);
         }
 
         loadData();
@@ -77,21 +74,23 @@ export default function EmployeeTable() {
     return (
         <div>
             <div className="table-management-menu">
-
-                <button className="table-settings-button" onClick={(event) => toggleSettings(event)}>Настройки</button>
+                <div className="table-management-buttons">
+                    <button className="table-settings-button" onClick={(event) => toggleSettings(event)}>Настройки</button>
+                    <Link className="table-create-user" to={`/admin/employees/new`}>Добавить пользователя</Link>
+                </div>
             </div>
             <div className="table-settings" id="table-settings">
                 <label className="item">
                     ID: <input onClick={(event) => activeTableCol(event, 'ID', 'id')} type="checkbox" name="id" defaultChecked={true}/>
                 </label>
                 <label className="item">
-                    Имя: <input onClick={(event) => activeTableCol(event, 'First Name', 'first_name')} type="checkbox" name="first_name" defaultChecked={true}/>
+                    Имя: <input onClick={(event) => activeTableCol(event, 'First Name', 'firstName')} type="checkbox" name="firstName" defaultChecked={true}/>
                 </label>
                 <label className="item">
-                    Фамилия: <input onClick={(event) => activeTableCol(event, 'Last Name', 'last_name')} type="checkbox" name="last_name" defaultChecked={true}/>
+                    Фамилия: <input onClick={(event) => activeTableCol(event, 'Last Name', 'lastName')} type="checkbox" name="lastName" defaultChecked={true}/>
                 </label>
                 <label className="item">
-                    Отчество: <input onClick={(event) => activeTableCol(event, 'Second Name', 'second_name')} type="checkbox" name="second_name" defaultChecked={true}/>
+                    Отчество: <input onClick={(event) => activeTableCol(event, 'Second Name', 'secondName')} type="checkbox" name="secondName" defaultChecked={true}/>
                 </label>
                 <label className="item">
                     Email: <input onClick={(event) => activeTableCol(event, 'Email', 'email')} type="checkbox" name="email" defaultChecked={true}/>

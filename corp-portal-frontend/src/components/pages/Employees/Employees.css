@@ -38,3 +38,7 @@ td:last-of-type {
 tbody > tr:nth-of-type(even) {
     background-color: #21222D;
 }
+
+h2 {
+    color: #FFFFFF;
+}

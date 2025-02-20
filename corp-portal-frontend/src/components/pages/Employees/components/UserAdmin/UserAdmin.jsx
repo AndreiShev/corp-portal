@@ -1,6 +1,7 @@
 import React, { useState, useEffect  } from 'react';
 import axios from 'axios';
 import {useParams} from "react-router-dom";
+import './UserAdmin.css'
 
 const UserAdmin = () => {
     const [id, setId] = useState('');
@@ -9,13 +10,14 @@ const UserAdmin = () => {
     const [secondName, setSecondName] = useState('');
     const [email, setEmail] = useState('');
 
-
     const { userId } = useParams();
 
     // Метод для загрузки данных пользователя по id
     const loadUserData = async (userId) => {
         try {
-
+            if (userId === 'new') {
+                return;
+            }
             const response = await axios.get(`http://localhost:8080/api/v1/employee/${userId}`);
             const userData = response.data;
 
@@ -39,15 +41,25 @@ const UserAdmin = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        let response = null;
         try {
-            const response = await axios.put(`http://localhost:8080/api/v1/employee/${userId}`, {
-                id,
-                firstName,
-                lastName,
-                secondName,
-                email,
-            });
+            if (id !== '') {
+                response = await axios.put(`http://localhost:8080/api/v1/employee`, {
+                    id,
+                    firstName,
+                    lastName,
+                    secondName,
+                    email,
+                });
+            } else {
+                response = await axios.post(`http://localhost:8080/api/v1/employee`, {
+                    firstName,
+                    lastName,
+                    secondName,
+                    email,
+                });
+                setId(response.data.id);
+            }
 
             console.log('User registered successfully:', response.data);
             // можно обработать успешный ответ и, например, перенаправить пользователя на другую страницу
@@ -58,31 +70,29 @@ const UserAdmin = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                ID:
-                <input type="text" value={id} onChange={(e) => setId(e.target.value)}/>
+        <form className="form-user" onSubmit={handleSubmit}>
+            {id !=='' && (<label className="form-user-label">
+                    <span>ID:</span>
+                    <input readOnly type="text" value={id} onChange={(e) => setId(e.target.value)}/>
             </label>
-            <br/>
-            <label>
-                Имя:
+            )}
+            <label className="form-user-label">
+                <span>Имя:</span>
                 <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
             </label>
-            <br/>
-            <label>
-                Фамилия:
+            <label className="form-user-label">
+                <span>Фамилия: </span>
                 <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
             </label>
-            <label>
-                Отчество:
+            <label className="form-user-label">
+                <span>Отчество: </span>
                 <input type="text" value={secondName} onChange={(e) => setSecondName(e.target.value)}/>
             </label>
-            <label>
-                Email:
+            <label className="form-user-label">
+                <span>Email: </span>
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
             </label>
-            <br/>
-            <button type="submit">Сохранить</button>
+            <button className="form-user-button" type="submit">Сохранить</button>
         </form>
     );
 };
