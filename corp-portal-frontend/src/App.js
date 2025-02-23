@@ -1,25 +1,26 @@
 import './styles/common.css'
 import Root from './components/pages/Root/Root';
 import ErrorPage from './error-page';
-import Company from "./components/pages/Company/Company";
+import Company from "./components/pages/RootEmployee/pages/Company/Company";
 import RootAdmin from "./components/pages/RootAdmin/RootAdmin";
-import Content from "./components/pages/Content/Content";
-import Dashboard from "./components/pages/Dashboard/Dashboard";
-import Services from "./components/pages/Services/Services";
-import Settings from "./components/pages/Settings/Settings";
+import Content from "./components/pages/RootAdmin/pages/Content/Content";
+import Dashboard from "./components/pages/RootAdmin/pages/Dashboard/Dashboard";
+import Services from "./components/pages/RootAdmin/pages/Services/Services";
+import Settings from "./components/pages/RootAdmin/pages/Settings/Settings";
 
 import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import Employees from "./components/pages/Employees/Employees";
-import UserGroups from "./components/pages/UserGroups/UserGroups";
+import Employees from "./components/pages/RootAdmin/pages/Settings/pages/Employees/Employees";
+import UserGroups from "./components/pages/RootAdmin/pages/Settings/pages/UserGroups/UserGroups";
 import RootEmployee from "./components/pages/RootEmployee/RootEmployee";
-import MainPage from "./components/pages/Main/MainPage";
-import Staff from "./components/pages/Staff/Staff";
-import Documents from "./components/pages/Documents/Documents";
-import EmployeeServices from "./components/pages/EmployeeServices/EmployeeServices";
-import UserAdmin from "./components/pages/Employees/components/UserAdmin/UserAdmin";
+import MainPage from "./components/pages/RootEmployee/pages/Main/MainPage";
+import Staff from "./components/pages/RootEmployee/pages/Staff/Staff";
+import Documents from "./components/pages/RootEmployee/pages/Documents/Documents";
+import EmployeeServices from "./components/pages/RootEmployee/pages/EmployeeServices/EmployeeServices";
+import UserAdmin from "./components/pages/RootAdmin/pages/Settings/pages/Employees/components/UserAdmin/UserAdmin";
+import Department from "./components/pages/RootAdmin/pages/Content/Department/Department";
 
 
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "content",
-                        element: <Content />
+                        element: <Content />,
                     },
                     {
                         path: "dashboard",
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
                         path: "employees/:userId",
                         element: <UserAdmin />
                     },
+                    {
+                        path: "department",
+                        element: <Department />
+                    }
                 ]
             }, {
                 path: "/",

@@ -92,6 +92,7 @@ const UserAdmin = () => {
                 <span>Email: </span>
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
             </label>
+
             <button className="form-user-button" type="submit">Сохранить</button>
         </form>
     );

@@ -75,9 +75,7 @@ const Sidebar = () => {
                 )}
                 {activeMenuItem === 'content' && (
                     <ul className="submenu">
-                        <li><Link className="link" to="#">Подпункт 4</Link></li>
-                        <li><Link className="link" to="#">Подпункт 5</Link></li>
-                        <li><Link className="link" to="#">Подпункт 6</Link></li>
+                        <li><Link className="link" to="/admin/department">Подразделения</Link></li>
                     </ul>
                 )}
                 {activeMenuItem === 'services' && (
