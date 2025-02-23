@@ -15,7 +15,7 @@
 }
 
 .form-user-label span {
-    min-width: 80px;
+    width: 145px;
     text-align: right;
     margin-right: 10px;
 }
@@ -43,4 +43,13 @@ input[type="email"] {
 
 .form-user-button:hover {
     background-color: #45a049;
+}
+
+.user-department {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }

@@ -14,6 +14,7 @@ import ru.corp_portal.corp_portal_core.service.CompanyService;
 @RestController
 @RequestMapping("/api/v1/company")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class CompanyController {
     private final CompanyService companyService;
     private final CompanyMapper companyMapper;
