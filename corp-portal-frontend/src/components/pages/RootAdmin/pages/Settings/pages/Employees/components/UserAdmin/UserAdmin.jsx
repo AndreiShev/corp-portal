@@ -3,13 +3,6 @@ import axios from 'axios';
 import {useParams, useNavigate} from "react-router-dom";
 import './UserAdmin.css'
 import EmployeeDepartment from "./components/EmployeeDepartment";
-//
-// async function getJsonTree() {
-//     return new Promise((resolve) => {
-//         resolve(axios.get(`http://localhost:8080/api/v1/department/tree/1`));
-//     });
-// }
-
 
 const UserAdmin = () => {
     const [id, setId] = useState('');
@@ -21,9 +14,10 @@ const UserAdmin = () => {
     const { userId } = useParams();
     let navigate = useNavigate();
     const [data, setData] = useState([]);
+    const employeeDepartmentId = 5;
 
-    // Метод для загрузки данных пользователя по id
-    const loadUserData = async (userId) => {
+
+    const loadUserDataById = async (userId) => {
         try {
             if (userId === 'new') {
                 return;
@@ -44,7 +38,7 @@ const UserAdmin = () => {
 
     const loadDepartmentData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/v1/department/tree/1`);
+            const response = await axios.get(`http://localhost:8080/api/v1/department/tree`);
             setData(response.data);
         } catch (error) {
             console.log('Error loading department data: ', error);
@@ -54,7 +48,7 @@ const UserAdmin = () => {
     // Вызываем метод при монтировании компонента
     useEffect(() => {
         if (userId) {
-            loadUserData(userId);
+            loadUserDataById(userId);
         }
 
         loadDepartmentData();
@@ -89,21 +83,6 @@ const UserAdmin = () => {
             // можно обработать ошибку и показать сообщение пользователю
         }
     };
-
-    function getDepartmentTree(data) {
-        return (<ul style={{listStyleType: 'none', paddingLeft: 0}}>
-            {data.map((item) => (
-                <li key={item.id}>
-                    <strong >{item.name}</strong> (ID: {item.id})
-                    {item.children && item.children.length > 0 && (
-                        getDepartmentTree(item.children)
-                    )}
-                </li>
-            ))}
-        </ul>);
-    }
-
-    const employeeDepartmentId = 5; // Текущее подразделение сотрудника (например, из пропсов)
 
     return (
         <form className="form-user" onSubmit={handleSubmit}>

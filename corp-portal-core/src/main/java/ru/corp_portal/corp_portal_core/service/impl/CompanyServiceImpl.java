@@ -1,8 +1,10 @@
 package ru.corp_portal.corp_portal_core.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.corp_portal.corp_portal_core.entities.Company;
+import ru.corp_portal.corp_portal_core.entities.Department;
 import ru.corp_portal.corp_portal_core.exceptions.EntityNotFoundException;
 import ru.corp_portal.corp_portal_core.repository.CompanyRepository;
 import ru.corp_portal.corp_portal_core.service.CompanyService;

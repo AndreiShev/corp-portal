@@ -18,4 +18,6 @@ public interface DepartmentService {
     void delete(Integer id);
 
     JSONArray getThreeDepartments(Integer parent_id);
+
+    JSONArray getThreeAllDepartments();
 }

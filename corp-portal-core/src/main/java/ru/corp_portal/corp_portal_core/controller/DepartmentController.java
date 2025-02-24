@@ -43,6 +43,13 @@ public class DepartmentController {
         );
     }
 
+    @GetMapping("/tree")
+    public ResponseEntity<JSONArray> getTree() {
+        return ResponseEntity.ok().body(
+                departmentService.getThreeAllDepartments()
+        );
+    }
+
     @PostMapping("/")
     public ResponseEntity<DepartmentResponse> create(@RequestBody DepartmentInsert insert) {
         return ResponseEntity.ok().body(

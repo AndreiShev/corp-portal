@@ -14,6 +14,9 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
     @Override
     Optional<Department> findById(Integer id);
 
-    @Query(value = "select get_json_department(:item_id);", nativeQuery = true)
-    String findCarsAfterYear(@Param("item_id") Integer item_id);
+    @Query(value = "select get_json_department(:item_id)", nativeQuery = true)
+    String getJsonDepartment(@Param("item_id") Integer item_id);
+
+    @Query(value = "select get_json_all_department()", nativeQuery = true)
+    String getJsonAllDepartment();
 }

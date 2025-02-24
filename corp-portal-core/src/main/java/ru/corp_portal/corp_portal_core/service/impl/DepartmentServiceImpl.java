@@ -3,7 +3,6 @@ package ru.corp_portal.corp_portal_core.service.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,19 @@ public class DepartmentServiceImpl implements DepartmentService {
     public JSONArray getThreeDepartments(Integer parent_id) {
         Object obj = null;
         try {
-            obj = new JSONParser().parse(departmentRepository.findCarsAfterYear(parent_id));
+            obj = new JSONParser().parse(departmentRepository.getJsonDepartment(parent_id));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        return (JSONArray) obj;
+    }
+
+    @Override
+    public JSONArray getThreeAllDepartments() {
+        Object obj = null;
+        try {
+            obj = new JSONParser().parse(departmentRepository.getJsonAllDepartment());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -62,8 +73,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department existDepartment = getDepartment(id);
 
         if (department.getParent() != null && !department.getParent().equals(existDepartment.getParent())) {
-            existDepartment.getParent().getChildren().remove(department);
-            departmentRepository.save(existDepartment.getParent());
+            if (existDepartment.getParent() != null) {
+                existDepartment.getParent().getChildren().remove(department);
+                departmentRepository.save(existDepartment.getParent());
+            }
+
             department.getParent().getChildren().add(existDepartment);
             departmentRepository.save(department.getParent());
             existDepartment.setParent(department.getParent());
