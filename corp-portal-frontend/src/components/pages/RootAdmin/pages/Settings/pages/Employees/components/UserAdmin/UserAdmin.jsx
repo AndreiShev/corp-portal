@@ -5,17 +5,11 @@ import './UserAdmin.css'
 import EmployeeDepartment from "./components/EmployeeDepartment";
 
 const UserAdmin = () => {
-    const [id, setId] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [secondName, setSecondName] = useState('');
-    const [email, setEmail] = useState('');
-
+    let [employee, setEmployee] = useState({});
+    let [initialEmployee, setInitialEmployee] = useState({})
+    const [departmentStructure, setDepartmentStructure] = useState([]);
     const { userId } = useParams();
     let navigate = useNavigate();
-    const [data, setData] = useState([]);
-    const employeeDepartmentId = 5;
-
 
     const loadUserDataById = async (userId) => {
         try {
@@ -23,23 +17,17 @@ const UserAdmin = () => {
                 return;
             }
             const response = await axios.get(`http://localhost:8080/api/v1/employee/${userId}`);
-            const userData = response.data;
-
-            // Устанавливаем данные в состояние формы
-            setId(userData.id);
-            setFirstName(userData.firstName);
-            setLastName(userData.lastName);
-            setSecondName(userData.secondName);
-            setEmail(userData.email);
+            setEmployee(response.data);
+            setInitialEmployee(response.data);
         } catch (error) {
             console.error('Error loading user data:', error);
         }
     };
 
-    const loadDepartmentData = async () => {
+    const loadDepartmentStructure = async () => {
         try {
             const response = await axios.get(`http://localhost:8080/api/v1/department/tree`);
-            setData(response.data);
+            setDepartmentStructure(response.data);
         } catch (error) {
             console.log('Error loading department data: ', error);
         }
@@ -51,74 +39,85 @@ const UserAdmin = () => {
             loadUserDataById(userId);
         }
 
-        loadDepartmentData();
+        loadDepartmentStructure();
     }, [userId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        let response = null;
         try {
-            if (id !== '') {
-                response = await axios.put(`http://localhost:8080/api/v1/employee`, {
-                    id,
-                    firstName,
-                    lastName,
-                    secondName,
-                    email,
-                });
-            } else {
-                response = await axios.post(`http://localhost:8080/api/v1/employee`, {
-                    firstName,
-                    lastName,
-                    secondName,
-                    email,
-                });
-                setId(response.data.id);
-            }
+            if (employee.id !== '') {
+                // Сбор измененных полей
+                const changedFields = Object.keys(employee).reduce((acc, key) => {
+                    if (employee[key] !== initialEmployee[key]) {
+                        acc[key] = employee[key];
+                    }
+                    return acc;
+                }, {});
 
-            console.log('User registered successfully:', response.data);
-            // можно обработать успешный ответ и, например, перенаправить пользователя на другую страницу
+                if (Object.keys(changedFields).length > 0) {
+                    await axios.patch(`http://localhost:8080/api/v1/employee/${employee.id}`, changedFields);
+                }
+                // await axios.put(`http://localhost:8080/api/v1/employee`, {employee});
+            } else {
+                let response = await axios.post(`http://localhost:8080/api/v1/employee`, {employee});
+                setEmployee(response.data);
+            }
         } catch (error) {
             console.error('Error registering user:', error);
-            // можно обработать ошибку и показать сообщение пользователю
         }
+    };
+
+    // Универсальный обработчик изменений
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setEmployee(prevFields => ({
+            ...prevFields,
+            [name]: value
+        }));
     };
 
     return (
         <form className="form-user" onSubmit={handleSubmit}>
             <button onClick={() => navigate(-1)}>Назад</button>
-            {id !== '' && (<label className="form-user-label">
+            {employee && employee.id !== '' && (<label className="form-user-label">
                     <span>ID:</span>
-                    <input readOnly type="text" value={id} onChange={(e) => setId(e.target.value)}/>
+                    <input name="id" readOnly type="text" value={employee ? employee.id : ''} onChange={handleInputChange}/>
                 </label>
             )}
             <label className="form-user-label">
                 <span>Имя:</span>
-            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-        </label>
-        <label className="form-user-label">
-            <span>Фамилия: </span>
-            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-        </label>
-        <label className="form-user-label">
-            <span>Отчество: </span>
-            <input type="text" value={secondName} onChange={(e) => setSecondName(e.target.value)}/>
-        </label>
-        <label className="form-user-label">
-            <span>Email: </span>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-        </label>
-        <label className="form-user-label">
-            <span>Структура подразделений: </span>
-            <EmployeeDepartment
-                departmentJson={data}
-                employeeDepartmentId={employeeDepartmentId}
-            />
-        </label>
-        <button className="form-user-button" type="submit">Сохранить</button>
-    </form>
-)
-    ;
+                <input name="firstName" type="text" value={employee ? employee.firstName : ''} onChange={handleInputChange}/>
+            </label>
+            <label className="form-user-label">
+                <span>Фамилия: </span>
+                <input name="lastName" type="text" value={employee ? employee.lastName : ''} onChange={handleInputChange}/>
+            </label>
+            <label className="form-user-label">
+                <span>Отчество: </span>
+                <input name="secondName" type="text" value={employee ? employee.secondName : ''} onChange={handleInputChange}/>
+            </label>
+            <label className="form-user-label">
+                <span>Email: </span>
+                <input name="email" type="email" value={employee ? employee.email : ''} onChange={handleInputChange}/>
+            </label>
+            <label className="form-user-label">
+                <span>Структура подразделений: </span>
+                {employee && employee.id !== undefined && (<EmployeeDepartment
+                    departmentJson={departmentStructure}
+                    employeeDepartmentId={employee.department.id}
+                />)}
+            </label>
+            <label className="form-user-label">
+                <span>Компания: </span>
+                <input name="company" type="text" value={employee && employee.company ? employee.company.name : ''} onChange={handleInputChange}/>
+            </label>
+            <label className="form-user-label">
+                <span>Подразделение: </span>
+                <input name="department" type="text" value={employee && employee.department ? employee.department.name : ''} onChange={handleInputChange}/>
+            </label>
+            <button className="form-user-button" type="submit">Сохранить</button>
+        </form>
+    );
 };
 
 export default UserAdmin;

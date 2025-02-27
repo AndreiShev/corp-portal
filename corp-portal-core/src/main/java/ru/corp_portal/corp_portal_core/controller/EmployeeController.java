@@ -1,5 +1,6 @@
 package ru.corp_portal.corp_portal_core.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,13 @@ public class EmployeeController {
                         employeeService.update(employeeMapper.getEmployeeFromUpdate(update))
                 )
         );
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<EmployeeResponse> patchEmployee(@PathVariable String id, @RequestBody JsonNode patch) {
+        return ResponseEntity.ok().body(employeeMapper.getResponseFromEmployee(
+                employeeService.patch(UUID.fromString(id), patch)
+        ));
     }
 
     @DeleteMapping(value="/{id}")

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.corp_portal.corp_portal_core.dto.Response.DepartmentResponse;
 import ru.corp_portal.corp_portal_core.dto.Response.DepartmentResponseList;
 import ru.corp_portal.corp_portal_core.dto.insert.DepartmentInsert;
+import ru.corp_portal.corp_portal_core.dto.shortDto.DepartmentShortDto;
 import ru.corp_portal.corp_portal_core.dto.update.DepartmentUpdate;
 import ru.corp_portal.corp_portal_core.entities.Department;
 import ru.corp_portal.corp_portal_core.service.CompanyService;
@@ -67,5 +68,18 @@ public class DepartmentMapper {
         }
 
         return new DepartmentResponseList(departmentResponses);
+    }
+
+    public DepartmentShortDto getShortDtoFromDepartment(Department department) {
+        DepartmentShortDto departmentShortDto = new DepartmentShortDto();
+
+        if (department == null) {
+            return departmentShortDto;
+        }
+
+        departmentShortDto.setId(department.getId());
+        departmentShortDto.setName(department.getName());
+
+        return departmentShortDto;
     }
 }

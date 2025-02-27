@@ -1,4 +1,5 @@
 package ru.corp_portal.corp_portal_core.service;
+import com.fasterxml.jackson.databind.JsonNode;
 import ru.corp_portal.corp_portal_core.entities.Employee;
 
 
@@ -13,6 +14,8 @@ public interface  EmployeeService {
     Employee save(Employee employee);
 
     Employee update(Employee employee);
+
+    Employee patch(UUID id, JsonNode patch);
 
     void delete(UUID id);
 }

@@ -2,13 +2,8 @@ export default function Department(args) {
     const isSelected = args.department.id === args.selectedId;
 
     return (
-        <div style={{ marginLeft: '20px' }}>
-            <div
-                style={{
-                    fontWeight: isSelected ? 'bold' : 'normal',
-                    cursor: 'pointer',
-                    color: isSelected ? 'blue' : 'black',
-                }}
+        <div className="department-container">
+            <div className={isSelected ? 'department-item active' : 'department-item'} dept-id-attribute={args.department.id}
                 onClick={() => args.onSelect(args.department.id)}
             >
                 {args.department.name}

@@ -18,4 +18,8 @@ public class EmployeeResponse {
     private String secondName;
 
     private String email;
+
+    private String company;
+
+    private String department;
 }

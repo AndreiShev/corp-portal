@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.corp_portal.corp_portal_core.dto.Response.CompanyResponseList;
 import ru.corp_portal.corp_portal_core.dto.insert.CompanyInsert;
 import ru.corp_portal.corp_portal_core.dto.Response.CompanyResponse;
+import ru.corp_portal.corp_portal_core.dto.shortDto.CompanyShortDto;
 import ru.corp_portal.corp_portal_core.dto.update.CompanyUpdate;
 import ru.corp_portal.corp_portal_core.entities.Company;
 
@@ -44,5 +45,18 @@ public class CompanyMapper {
         }
 
         return new CompanyResponseList(companyResponseList);
+    }
+
+    public CompanyShortDto companyToShortDto(Company company) {
+        CompanyShortDto companyShortDto = new CompanyShortDto();
+
+        if (company == null) {
+            return companyShortDto;
+        }
+
+        companyShortDto.setName(company.getName());
+        companyShortDto.setId(company.getId());
+
+        return companyShortDto;
     }
 }

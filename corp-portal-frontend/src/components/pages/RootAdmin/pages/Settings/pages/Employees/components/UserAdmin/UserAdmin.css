@@ -53,3 +53,19 @@ input[type="email"] {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
+.department-container {
+    margin-left: 20px;
+}
+
+.department-item {
+    font-weight: normal;
+    cursor: pointer;
+    color: black;
+}
+
+.department-item.active {
+    font-weight: bold;
+    cursor: pointer;
+    color: blue;
+}

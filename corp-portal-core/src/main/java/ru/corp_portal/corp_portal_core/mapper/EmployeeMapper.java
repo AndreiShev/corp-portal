@@ -1,6 +1,8 @@
 package ru.corp_portal.corp_portal_core.mapper;
 
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.corp_portal.corp_portal_core.dto.Response.EmployeeResponseList;
 import ru.corp_portal.corp_portal_core.dto.insert.EmployeeInsert;
@@ -13,7 +15,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class EmployeeMapper {
+
+    private final CompanyMapper companyMapper;
+    private final DepartmentMapper departmentMapper;
 
     public Employee insertToEmployee(EmployeeInsert insert) {
         Employee employee = new Employee();
@@ -32,6 +38,8 @@ public class EmployeeMapper {
         employeeResponse.setEmail(employee.getEmail());
         employeeResponse.setSecondName(employee.getSecondName());
         employeeResponse.setId(employee.getId().toString());
+        employeeResponse.setCompany(employee.getCompany() != null ? employee.getCompany().getName() : "");
+        employeeResponse.setDepartment(employee.getDepartment() != null ? employee.getDepartment().getName() : "");
 
         return employeeResponse;
     }
